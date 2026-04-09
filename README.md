@@ -45,6 +45,45 @@ AI工具 - 自动化部署
 - Email: fufansong@gmail.com
 
 ## 🐳 Docker 部署
+## 📦 GitHub Container Registry
+
+### 自动构建的容器镜像
+
+每次推送到main分支时，GitHub Actions会自动构建并推送Docker镜像到GitHub Container Registry。
+
+**镜像地址**: `ghcr.io/fabio2026-ui/ai-tools-collection:latest`
+
+### 拉取和使用镜像
+
+```bash
+# 拉取最新镜像
+docker pull ghcr.io/fabio2026-ui/ai-tools-collection:latest
+
+# 运行容器
+docker run -d -p 8080:8000 --name ai-tools-collection ghcr.io/fabio2026-ui/ai-tools-collection:latest
+
+# 使用docker-compose
+version: '3.8'
+services:
+  ai-tools-collection:
+    image: ghcr.io/fabio2026-ui/ai-tools-collection:latest
+    ports:
+      - "8080:8000"
+```
+
+### 手动构建和推送
+
+```bash
+# 登录到GitHub Container Registry
+echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+# 构建镜像
+docker build -t ghcr.io/fabio2026-ui/ai-tools-collection:latest .
+
+# 推送镜像
+docker push ghcr.io/fabio2026-ui/ai-tools-collection:latest
+```
+
 
 ### 快速开始
 
