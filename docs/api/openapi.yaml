@@ -1,0 +1,73 @@
+openapi: 3.0.3
+info:
+  title: aitoolscollection API
+  description: API for aitoolscollection
+  version: 1.0.0
+  contact:
+    name: Fabio
+    email: fufansong@gmail.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+servers:
+  - url: https://api.aitoolscollection.com/v1
+    description: Production server
+  - url: http://localhost:8000/v1
+    description: Development server
+
+paths:
+  /health:
+    get:
+      summary: Health check
+      description: Check if the API is running
+      responses:
+        '200':
+          description: API is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "healthy"
+                  timestamp:
+                    type: string
+                    format: date-time
+                  version:
+                    type: string
+  
+  /docs:
+    get:
+      summary: API documentation
+      description: Get API documentation
+      responses:
+        '200':
+          description: Documentation retrieved
+          content:
+            text/html:
+              schema:
+                type: string
+  
+  /openapi.json:
+    get:
+      summary: OpenAPI specification
+      description: Get OpenAPI specification
+      responses:
+        '200':
+          description: OpenAPI spec retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - BearerAuth: []
