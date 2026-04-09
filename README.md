@@ -43,3 +43,51 @@ AI工具 - 自动化部署
 ## 联系
 - GitHub: [fabio2026-ui](https://github.com/fabio2026-ui)
 - Email: fufansong@gmail.com
+
+## 🐳 Docker 部署
+
+### 快速开始
+
+1. **克隆仓库**
+   ```bash
+   git clone https://github.com/fabio2026-ui/ai-tools-collection.git
+   cd ai-tools-collection
+   ```
+
+2. **使用Docker部署**
+   ```bash
+   # 方法1: 使用部署脚本
+   ./deploy.sh
+   
+   # 方法2: 手动部署
+   docker-compose build
+   docker-compose up -d
+   ```
+
+3. **访问应用**
+   - 本地访问: http://localhost:8080
+   - 容器状态: `docker ps | grep ai-tools-collection`
+   - 查看日志: `docker logs ai-tools-collection`
+
+### 管理命令
+
+```bash
+# 停止容器
+docker-compose down
+
+# 重启容器
+docker-compose restart
+
+# 查看日志
+docker-compose logs -f
+
+# 进入容器
+docker exec -it ai-tools-collection bash
+```
+
+### 生产环境部署
+
+对于生产环境，建议使用:
+- **Docker Swarm** 或 **Kubernetes** 进行容器编排
+- **Traefik** 或 **Nginx** 作为反向代理
+- **Let's Encrypt** 进行SSL证书管理
